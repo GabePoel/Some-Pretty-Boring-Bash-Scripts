@@ -1,0 +1,18 @@
+#!/bin/bash
+cd ~/Seconcephalon/
+> .gitignore
+find Projects/* -size +100M | cat >> .gitignore
+# cd ~/Insync/gpe@berkeley.edu/'Google Drive'/Seconcephalon/
+# > .gitignore
+# find Projects/LEPRECHAUN/'Analytis Laboratory'/'RUS data'/* | cat >> .gitignore
+git fetch
+git pull
+git add "*.md"
+git add "*.png"
+git add "*.jpg"
+git add "*.jpeg"
+git add "*.csv"
+git add "*.pdf"
+time=`date`
+git commit -m "${time}"
+git push

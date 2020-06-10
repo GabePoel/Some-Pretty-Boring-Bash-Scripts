@@ -1,0 +1,3 @@
+error: bad ref for .git/logs/refs/remotes/origin/HEAD (2)
+fatal: sha1 file '.git/objects/pack/tmp_pack_DM4ntg' write error: No space left on device
+fatal: failed to run repack
