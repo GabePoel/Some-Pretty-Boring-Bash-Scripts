@@ -1,5 +1,4 @@
-#!/bin/bash
-
+ #!/bin/bash
 cd ~/Configuration/Icons
 
 for file in Packs/McMojave-circle/src/apps/scalable/*.svg

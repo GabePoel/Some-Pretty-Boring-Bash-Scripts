@@ -1,3 +1,4 @@
+ #!/bin/bash
  killall discord*
  discord
  sleep 30s
