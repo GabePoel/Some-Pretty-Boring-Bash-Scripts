@@ -1,0 +1,3 @@
+ #!/bin/bash
+ # Shift+Alt+Super+L is the recommended shortcut
+ gsettings set org.gnome.shell disable-user-extensions false
