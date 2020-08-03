@@ -1,0 +1,2 @@
+#!/bin/bash
+cd ~/Documents/Quick-Installs && python3 quick-setup.py
