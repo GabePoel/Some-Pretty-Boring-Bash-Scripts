@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cp ~/.config/dconf/user ~/Documents/Private-Settings/dconf
+dconf dump / > ~/Documents/Private-Settings/all.dconf
 cp ~/Templates/* ~/Documents/Private-Settings/templates -r
 cd ~/Documents/Private-Settings
 git add .
