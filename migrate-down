@@ -1,4 +1,7 @@
 #!/bin/bash
 
+cd ~/Documents/Private-Settings
+git fetch
+git pull
 dconf load / < ~/Documents/Private-Settings/all.dconf
 cp ~/Documents/Private-Settings/templates/* ~/Templates -r
