@@ -1,7 +1,5 @@
 #!/bin/bash
 
-cd ~/Documents/Private-Settings
-git fetch
-git pull
-dconf load / < ~/Documents/Private-Settings/all.dconf
-cp ~/Documents/Private-Settings/templates/* ~/Templates -r
+cd ~/Documents/Configuration/Private-Settings && git fetch && git pull
+dconf load / < ~/Documents/Configuration/Private-Settings/all.dconf
+cp ~/Documents/Configuration/Private-Settings/templates/* ~/Templates -r

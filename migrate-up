@@ -1,8 +1,5 @@
 #!/bin/bash
 
-dconf dump / > ~/Documents/Private-Settings/all.dconf
-cp ~/Templates/* ~/Documents/Private-Settings/templates -r
-cd ~/Documents/Private-Settings
-git add .
-git commit -m "Settings upload"
-git push
+dconf dump / > ~/Documents/Configuration/Private-Settings/all.dconf
+cp ~/Templates/* ~/Documents/Configuration/Private-Settings/templates -r
+cd ~/Documents/Configuration/Private-Settings && git add . && git commit -m "Settings upload." && git push
