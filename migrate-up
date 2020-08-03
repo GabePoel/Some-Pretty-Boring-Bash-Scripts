@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cp ~/.config/dconf/user ~/Documents/Private-Settings/user
+cp ~/Templates/* ~/Documents/Private-Settings/templates -r
+cd ~/Documents/Private-Settings
+git add .
+git commit -m "Settings upload"
+git push

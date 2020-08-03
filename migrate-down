@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cp ~/Documents/Private-Settings/dconf/user ~/.config/dconf
+cp ~/Documents/Private-Settings/templates/* ~/Templates -r
