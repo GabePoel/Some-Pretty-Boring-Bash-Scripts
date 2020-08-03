@@ -3,3 +3,4 @@
 cd ~/Documents/Configuration/Private-Settings && git fetch && git pull
 dconf load / < ~/Documents/Configuration/Private-Settings/all.dconf
 cp ~/Documents/Configuration/Private-Settings/templates/* ~/Templates -r
+gsettings get org.gnome.desktop.background picture-uri ~/Documents/Configuration/Private-Settings/wallpaper.jpg
