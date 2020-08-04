@@ -2,4 +2,5 @@
 
 dconf dump / > ~/Documents/Configuration/Private-Settings/all.dconf
 cp ~/Templates/* ~/Documents/Configuration/Private-Settings/templates -r
+sudo hblock export profile ~/Documents/Configuration/Private-Settings
 cd ~/Documents/Configuration/Private-Settings && git add . && git commit -m "Settings upload." && git push
