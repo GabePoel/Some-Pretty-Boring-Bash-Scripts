@@ -4,3 +4,4 @@ cd ~/Documents/Configuration/Private-Settings && git pull
 dconf load / < ~/Documents/Configuration/Private-Settings/all.dconf
 cp ~/Documents/Configuration/Private-Settings/templates/* ~/Templates -r
 gsettings set org.gnome.desktop.background picture-uri file:///home/gabriel/Documents/Configuration/Private-Settings/wallpaper.jpg
+ln -s ~/Documents/Configuration/Private-Settings/fonts/* ~/.local/share/fonts/ -f
