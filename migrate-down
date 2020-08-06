@@ -5,5 +5,6 @@ dconf load / < ~/Documents/Configuration/Private-Settings/all.dconf
 cp ~/Documents/Configuration/Private-Settings/templates/* ~/Templates -r
 gsettings set org.gnome.desktop.background picture-uri file:///home/gabriel/Documents/Configuration/Private-Settings/wallpaper.jpg
 sudo hblock import profile ~/Documents/Configuration/Private-Settings/hBlock_profile.zip
-cp sudo ~/Configuration/Private-Settings /usr/share/applications/defaults.list
+cp sudo ~/Documents/Configuration/Private-Settings /usr/share/applications/defaults.list
 ln -s ~/Documents/Configuration/Private-Settings/fonts/* ~/.local/share/fonts/ -f
+cp ~/Documents/Configuration/Private-Settings/ulauncher ~/.config/ulauncher -r
