@@ -4,5 +4,5 @@ dconf dump / > ~/Documents/Configuration/Private-Settings/all.dconf
 cp ~/Templates/* ~/Documents/Configuration/Private-Settings/templates -r
 hblock export profile ~/Documents/Configuration/Private-Settings
 sudo cp /usr/share/applications/defaults.list ~/Documents/Configuration/Private-Settings/defaults.list
-cp ~/.config/ulauncher ~/Documents/Configuration/Private-Settings/ulauncher -r
+cp ~/.config/ulauncher/* ~/Documents/Configuration/Private-Settings/ulauncher -r
 cd ~/Documents/Configuration/Private-Settings && git add . && git commit -m "Settings upload." && git push
