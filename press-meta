@@ -1,0 +1,4 @@
+# !/bin/bash
+xdotool keyup "ctrl+shift+y"
+sleep 0.01
+xdotool key "super"
