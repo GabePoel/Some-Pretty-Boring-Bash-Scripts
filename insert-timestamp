@@ -1,5 +1,3 @@
 # !/bin/bash
-xdotool keyup "ctrl+e"
 date '+%m-%d-%Y' | tr -d "\n" | xsel -i -b
-xdotool key "ctrl+v"
 
