@@ -1,0 +1,233 @@
+#!/usr/bin/python3
+from os import path
+from PyPDF2 import PdfFileWriter, PdfFileReader
+
+def bookmark(pdf, bookmarks, parent=None, append='', insert=False, offset=0):
+    bms = []
+    n = 1
+    for b in bookmarks:
+        if insert:
+            title = append + str(n) + ' - ' + b[0]
+        else:
+            title = b[0]
+        bms.append(pdf.addBookmark(title, b[1] + offset, parent))
+        n += 1
+    return bms
+
+fp_in = path.join(path.expanduser('~'), 'Library', 'Atomic Physics - Foot.pdf')
+fp_out = path.join(path.expanduser('~'), 'Desktop', 'Atomic Physics - Foot.pdf')
+ip = PdfFileReader(open(fp_in, 'rb'))
+op = PdfFileWriter()
+for page in range(ip.getNumPages()):
+    page = ip.getPage(page)
+    op.addPage(page)
+
+bm_pre = [
+    ('Cover', 0),
+    ('Preface', 5),
+    ('Contents', 9)
+]
+
+bm_0 = [
+    ('Early Atomic Physics', 1),
+    ('The Hydrogen Atom', 22),
+    ('Helium', 45),
+    ('The Alkalis', 60),
+    ('The LS-Coupling Scheme', 80),
+    ('Hyperfine Structure and Isotope Shift', 97),
+    ('The Interaction of Atoms with Radiation', 123),
+    ('Doppler-Free Laser Spectroscopy', 151),
+    ('Laser Cooling and Trapping', 178),
+    ('Magnetic Trapping, Evaporative Cooling and Bose-Einstein Condensation', 218),
+    ('Atom Interferometry', 246),
+    ('Ion Traps', 259),
+    ('Quantum Computing', 282),
+]
+
+bm_post = [
+    ('A - Perturbation Theory', 298),
+    ('B - The Calculation of Electrostatic Energies', 302),
+    ('C - Magnetic Dipole Transitions', 305),
+    ('D - The Line Shape in Saturated Absorption Spectroscopy', 307),
+    ('E - Raman and Two-Photon Transitions', 310),
+    ('F - The Statistical Mechanics of Bose-Einstein Condensation', 315),
+    ('References', 319),
+    ('Index', 326)
+]
+
+bm_1 = [
+    ('Introduction', 1),
+    ('Spectrum of Atomic Hydrogen', 1),
+    ("Bohr's Theory", 3),
+    ('Relativistic Effects', 5),
+    ('Moseley and the Atomic Number', 7),
+    ('Radiative Decay', 11),
+    ('Einstein A and B Coefficients', 11),
+    ('The Zeeman Effect', 13),
+    ('Summary of Atomic Units', 18)
+]
+
+bm_2 = [
+    ('The Schrödinger Equation', 22),
+    ('Transitions', 29),
+    ('Fine Structure', 34),
+]
+
+bm_3 = [
+    ('The Ground State of Helium', 45),
+    ('Excited States of Helium', 46),
+    ('Evaluation of the Integrals in Helium', 53)
+]
+
+bm_4 = [
+    ('Shell Structure and the Periodic Table', 60),
+    ('The Quantum Defect', 61),
+    ('The Central-Field Approximation', 64),
+    ('Numerical Solution of the Schrödinger Equation', 68),
+    ('The Spin-Orbit Interaction: A Quantum Mechanical Approach', 71),
+    ('Fine Structure in the Alkalis', 73)
+]
+
+bm_5 = [
+    ('Fine Structure in the LS-Coupling Scheme', 83),
+    ('The jj-Coupling Scheme', 84),
+    ('Intermediate Coupling: The Transition Between Coupling Schemes', 86),
+    ('Selection Rules in the LS-Coupline Scheme', 90),
+    ('The Zeeman Effect', 90),
+    ('Summary', 93)
+]
+
+bm_6 = [
+    ('Hyperfine Structure', 97),
+    ('Isotope Shift', 105),
+    ('Zeeman Effect and Hyperfine Structure', 108),
+    ('Measurement of Hyperfine Structure', 112)
+]
+
+bm_7 = [
+    ('Setting up the Equations', 123),
+    ('The Einstain B Coefficients', 126),
+    ('Interaction with Monochromatic Radiation', 127),
+    ('Ramsey Fringes', 132),
+    ('Radiative Damping', 134),
+    ('The Optical Absorption Cross-Section', 138),
+    ('The A.C. Stark Effect or Light Shift', 144),
+    ('Comment on Semiclassical Theory', 145),
+    ('Conclusions', 146)
+]
+
+bm_8 = [
+    ('Doppler Broadening of Spectral Lines', 151),
+    ('The Crossed-Beam Method', 153),
+    ('Saturated Absorption Spectroscopy', 155),
+    ('Two-Photon Spectroscopy', 163),
+    ('Calibration in Laser Spectroscopy', 168)
+]
+
+bm_9 = [
+    ('The Scattering Force', 179),
+    ('Slowing an Atomic Beam', 182),
+    ('The Optical Molasses Technique', 185),
+    ('The Magneto-Optical Trap', 190),
+    ('Introduction to the Dipole Force', 194),
+    ('Theory of the Dipole Force', 197),
+    ('The Sisyphus Cooling Technique', 203),
+    ('Raman Transitions', 208),
+    ('An Atomic Fountain', 211),
+    ('Conclusions', 213)
+]
+
+bm_10 = [
+    ('Principle of Magnetic Trapping', 218),
+    ('Magnetic Trapping', 220),
+    ('Evaporative Cooling', 224),
+    ('Bose-Einstein Condensation', 226),
+    ('Bose-Einstein Condensation in Trapped Atomic Vapours', 228),
+    ('A Bose-Einstein Condensate', 234),
+    ('Properties of Bose-Condensed Gases', 239),
+    ('Conclusions', 242)
+]
+
+bm_11 = [
+    ("Young's Double-Slit Experiment", 247),
+    ('A Diffraction Grating for Atoms', 249),
+    ('The Three-Grating Interferometer', 251),
+    ('Measurement of Rotation', 251),
+    ('The Diffraction of Atoms by Light', 253),
+    ('Conclusions', 257)
+]
+
+bm_12 = [
+    ('The Force on Ions in an Electric Field', 259),
+    ("Earnshaw's Theorem", 260),
+    ('The Paul Trap', 261),
+    ('Buffer Gas Cooling', 266),
+    ('Laser Cooling of Trapped Ions', 267),
+    ('Quantum Jumps', 269),
+    ('The Penning Trap and the Paul Trap', 271),
+    ('Electron Beam Ion Trap', 275),
+    ('Resolved Sideband Cooling', 277),
+    ('Summary of Ion Traps', 279)
+]
+
+bm_13 = [
+    ('Qubits and their Properties', 283),
+    ('A Quantum Logic Gate', 287),
+    ('Parallelism in Quantum Computing', 289),
+    ('Summary of Quantum Computers', 291),
+    ('Decoherence and Quantum Error Correction', 291),
+    ('Conclusion', 293)
+]
+
+bm_a = [
+    ('Mathematics of Perturbation Theory', 298),
+    ('Interaction of Classical Oscillators of Similar Frequenceis', 299)
+]
+
+bm_e = [
+    ('Raman Transitions', 310),
+    ('Two-Photon Transitions', 313),
+]
+
+bm_f = [
+    ('The Statistical Mechanics of Photons', 315),
+    ('Bose-Einstein Condensation', 316)
+]
+
+m_pre = bookmark(op, bm_pre)
+m_0 = bookmark(op, bm_0, insert=True, offset=14)
+m_post = bookmark(op, bm_post, offset=14)
+
+bookmark(op, bm_1, m_0[0], '1.', True, 14)
+bookmark(op, bm_2, m_0[1], '2.', True, 14)
+bookmark(op, bm_3, m_0[2], '3.', True, 14)
+bookmark(op, bm_4, m_0[3], '4.', True, 14)
+bookmark(op, bm_5, m_0[4], '5.', True, 14)
+bookmark(op, bm_6, m_0[5], '6.', True, 14)
+bookmark(op, bm_7, m_0[6], '7.', True, 14)
+bookmark(op, bm_8, m_0[7], '8.', True, 14)
+bookmark(op, bm_9, m_0[8], '9.', True, 14)
+bookmark(op, bm_10, m_0[9], '10.', True, 14)
+bookmark(op, bm_11, m_0[10], '11.', True, 14)
+bookmark(op, bm_12, m_0[11], '12.', True, 14)
+bookmark(op, bm_13, m_0[12], '13.', True, 14)
+bookmark(op, bm_a, m_post[0], 'A.', True, 14)
+bookmark(op, bm_e, m_post[4], 'E.', True, 14)
+bookmark(op, bm_f, m_post[5], 'F.', True, 14)
+
+bookmark(op, [('Exercises', 19)], offset=14, parent=m_0[0])
+bookmark(op, [('Further Reading', 42), ('Exercises', 42)], offset=14, parent=m_0[1])
+bookmark(op, [('Further Reading', 56), ('Exercises', 58)], offset=14, parent=m_0[2])
+bookmark(op, [('Further Reading', 75), ('Exercises', 76)], offset=14, parent=m_0[3])
+bookmark(op, [('Further Reading', 94), ('Exercises', 94)], offset=14, parent=m_0[4])
+bookmark(op, [('Further Reading', 119), ('Exercises', 120)], offset=14, parent=m_0[5])
+bookmark(op, [('Further Reading', 147), ('Exercises', 148)], offset=14, parent=m_0[6])
+bookmark(op, [('Further Reading', 175), ('Exercises', 175)], offset=14, parent=m_0[7])
+bookmark(op, [('Exercises', 214)], offset=14, parent=m_0[8])
+bookmark(op, [('Exercises', 243)], offset=14, parent=m_0[9])
+bookmark(op, [('Further Reading', 258), ('Exercises', 258)], offset=14, parent=m_0[10])
+bookmark(op, [('Further Reading', 279), ('Exercises', 280)], offset=14, parent=m_0[11])
+bookmark(op, [('Further Reading', 294), ('Exercises', 294)], offset=14, parent=m_0[12])
+
+with open(fp_out, 'wb') as out:
+    op.write(out)
