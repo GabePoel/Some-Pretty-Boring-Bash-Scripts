@@ -1,0 +1,368 @@
+#!/usr/bin/python3
+from os import path
+from PyPDF2 import PdfFileWriter, PdfFileReader
+
+bm_pre = [
+    ('Cover', 0),
+    ('Contents', 9),
+    ('Preface to the First Edition', 25),
+    ('Preface to the Second Edition', 27),
+    ('Preface to the Third Edition', 29),
+]
+
+bm_post = [
+    ('A - Math Review', 1097),
+    ('B - How to Draw Schematic Diagrams', 1101),
+    ('C - Resistor Types', 1104),
+    ("D - Thevenin's Theorem", 1107),
+    ('E - LC Butterworth Filters', 1109),
+    ('F - Load Lines', 1112),
+    ('G - The Curve Tracer', 1115),
+    ('H - Transmission Lines and Impedance Matching', 1116),
+    ('I - Television: A Compact Tutorial', 1131),
+    ('J - SPICE Primer', 1146),
+    ('K - "Where do I go to buy electronic goodies?"', 1150),
+    ('L - Workbench Instruments and Tools', 1152),
+    ('M - Catalogs, Magazines, Data-Books', 1153),
+    ('N - Futher Reading and References', 1154),
+    ('O - The Oscilloscope', 1158),
+    ('P - Acronyms and Abbreviations', 1166),
+    ('Index', 1023)
+]
+
+bm_0 = [
+    ('Foundations', 1),
+    ('Bipolar Transistors', 71),
+    ('Field-Effect Transistors', 131),
+    ('Operational Amplifiers', 223),
+    ('Precision Circuits', 292),
+    ('Filters', 391),
+    ('Oscillators and Timers', 425),
+    ('Low-Noise Techniques', 473),
+    ('Voltage Regulation and Power Conversion', 594),
+    ('Digital Logic', 703),
+    ('Programmable Logic Devices', 764),
+    ('Logic Interfacing', 790),
+    ('Digital meets Analog', 879),
+    ('Computers, Cntrollers, and Data Links', 989),
+    ('Microcontrollers', 1053)
+]
+
+bm_1 = [
+    ('Introduction', 1),
+    ('Voltage, Current, and Resistance', 1),
+    ('Signals', 13),
+    ('Capacitors and AC Circuits', 18),
+    ('Inductors and Transformers', 28),
+    ('Diodes and Diode Circuits', 31),
+    ('Impedance and Reactance', 40),
+    ('Putting it all Together: An AM Radio', 55),
+    ('Other Passive Components', 56),
+    ('A Parting Shot: Confusing Markings and Itty-Bitty Components', 64)
+]
+
+bm_2 = [
+    ('Introduction', 71),
+    ('Some Basic Transistor Circuits', 73),
+    ('Ebers-Moll Model Applied to Basic Transistor Circuits', 90),
+    ('Some Amplifier Building Blocks', 105),
+    ('Negative Feedback', 115),
+    ('Some Typical Transistor Circuits', 123)
+]
+
+bm_3 = [
+    ('Introduction', 131),
+    ('FET Linear Circuits', 141),
+    ('A Closer Look at JFETs', 165),
+    ('FET Switches', 171),
+    ('Power MOSFETs', 187),
+    ('MOSFETs in Linear Applications', 208)
+]
+
+bm_4 = [
+    ('Introduction to Op-Amps: The "perfect component"', 223),
+    ('Basic Op-Amp Circuits', 225),
+    ('An Op-Amp Smorgasbord', 232),
+    ('A Detailed Look at Op-Amp Behavior', 242),
+    ('A Detailed Look at Selected Op-Amp Circuits', 254),
+    ('Op-Amp Operation with a Single Power Supply', 261)
+]
+
+bm_5 = [
+    ('Precision Op-Amp Design Techniques', 292),
+    ('An Example: The Millivoltmeter, Revised', 293),
+    ('The Lessons: Error Budget, Unspecified Parameters', 295),
+    ('Another Example: Precision Amplified with Null Offset', 297),
+    ('A Precision-Designed Error Budget', 298),
+    ('Component Errors', 299),
+    ('Amplifier Input Errors', 301),
+    ('Amplifier Output Errors', 307),
+    ('RRIO Op-Amps: The Good, the Bad, and the Ugly', 315),
+    ('Choosing a Precision Op-Amp', 319),
+    ('Auto-Zeroing (chopper-stabilized) Amplifiers', 333),
+    ("Designs by the Masters: Agilent's Accurate DMMs", 342),
+    ('Difference, Differential, and Instrumentation Amplifiers: Introduction', 347),
+    ('Difference Amplifier', 348),
+    ('Instrumentation Amplifier', 356),
+    ('Instrumentation Amplifier Miscellany', 362),
+    ('Fully Differential Amplifiers', 373)
+]
+
+bm_6 = [
+    ('Introduction', 391),
+    ('Passive Filters', 391),
+    ('Active-Filter Circuits', 406)
+]
+
+bm_7 = [
+    ('Oscillators', 425),
+    ('Timers', 457)
+]
+
+bm_8 = [
+    ('"Noise"', 473),
+    ('Signal-to-Noise Ratio and Noise Figure', 478),
+    ('Bipolar Transistor Amplifier Noise', 481),
+    ('Finding en from Noise-Figure Specifications', 489),
+    ('Low-Noise Design with Bipolar Transistors', 492),
+    ('Low-Noise Design with JFETS', 509),
+    ('Charting the Bipolar-FET Shootout', 517),
+    ('Signal Transformers', 535),
+    ('Noise in Transimpedance Amplifiers', 537),
+    ('Noise Measurements and Noise Sources', 555),
+    ('Bandwidth Limiting and RMS Voltage Measurement', 561),
+    ('Signal-to-Noise Improvement by Bandwidth Narrowing', 574),
+    ('Power-Supply Noise', 578),
+    ('Interference, Shielfing, and Grounding', 579)
+]
+
+bm_9 = [
+    ('Tutorial: From Zener to Series-Pass Linear Regulator', 595),
+    ('Basic Linear Regulator Circuits with the Classic 723', 598),
+    ('Fully Integrated Linear Regulators', 600),
+    ('Heat and Power Design', 623),
+    ('From AC Line to Unregulated Supply', 628),
+    ('Switching Regulators and DC-DC Converters', 636),
+    ('AC-Line-Powered ("offline") Switching Converters', 660),
+    ('A Real-World Switcher Example', 665),
+    ('Inverters and Switching Amplifiers', 673),
+    ('Voltage References', 674),
+    ('Commercial Power-Supply Modules', 684),
+    ('Energy Storage: Batteries and Capacitors', 686),
+    ('Additional Topics in Power Regulation', 690),
+]
+
+bm_10 = [
+    ('Basic Logic Concepts', 703),
+    ('Digital Integrated Circuits: CMOS and Bipolar (TTL)', 714),
+    ('Combinational Logic', 722),
+    ('Sequential Logic', 728),
+    ('Sequential Functions Available as Integrated Circuits', 740),
+    ('Some Typical Digital Circuits', 748),
+    ('Micropower Digital Design', 753),
+    ('Logic Pathology', 755)
+]
+
+bm_11 = [
+    ('A Brief History', 764),
+    ('The Hardware', 765),
+    ('An Example: Pseudorandom Byte Generator', 770),
+    ('Advice', 782)
+]
+
+bm_12 = [
+    ('CMOS and TTL Logic Interfacing', 790),
+    ('An Aside: Probing Digital Logic From Comparators or Op-Amps', 808),
+    ('Comparators', 809),
+    ('Driving External Digital Loads from Logic Levels', 817),
+    ('Optoelectronics: Emitters', 829),
+    ('Optoelectronics: Detectors', 840),
+    ('Optocouplers and Relays', 843),
+    ('Optoelectronics: Fiber-Optic Digital Links', 852),
+    ('Digital Signals and Long Wires', 856),
+    ('Driving Cables', 858)
+]
+
+bm_13 = [
+    ('Some Preliminaries', 879),
+    ('Digital-to-Analgod Converters', 881),
+    ('Some DAC Application Examples', 891),
+    ('Converter Linearity: A Closer Look', 899),
+    ('Analog-to-Digital Converters', 900),
+    ('ADCs I: Parallel ("flash") Encoder', 903),
+    ('ADCs II: Successive Approximation', 908),
+    ('ADCs III: Integrating', 912),
+    ('ADCs IV: Delta-Sigma', 922),
+    ('ADCs: Choices and Tradeoffs', 938),
+    ('Some Unusual A/D and D/A Converters', 942),
+    ('Some A/D Conversion System Examples', 946),
+    ('Phase-Locked Loops', 955),
+    ('Pseudorandom Bit Sequences and Noise Generation', 974)
+]
+
+bm_14 = [
+    ('Computer Architecture: CPU and Data Bus', 990),
+    ('A Computer Instruction Set', 993),
+    ('Bus Signals and Interfacing', 997),
+    ('Memory Types', 1014),
+    ('Other Buses and Data Links: Overview', 1027),
+    ('Parallel Buses and Data Links', 1028),
+    ('Serial Buses and Data Links', 1032),
+    ('Number Formats', 1046)
+]
+
+bm_15 = [
+    ('Introduction', 1053),
+    ('Design Example 1: Suntan Monitor (V)', 1054),
+    ('Overview of Popular Microcontrolelr Families', 1059),
+    ('Design Example 2: AC Power Control', 1062),
+    ('Design Example 3: Frequency Synthesizer', 1065),
+    ('Design Example 4: Thermal Controller', 1069),
+    ('Design Example 5: Stabilized Mechanical Platform', 1077),
+    ('Peripheral ICs for Microcontrollers', 1078),
+    ('Development Environment', 1086),
+    ('Wrapup', 1092)
+]
+
+bm_a = [
+    ('Trigonometry, Exponentials, and Logarithms', 1097),
+    ('Complex Numbers', 1097),
+    ('Differential (Calculus)', 1099)
+]
+
+bm_b = [
+    ('General Principles', 1101),
+    ('Rules', 1101),
+    ('Hints', 1103),
+    ('A Humble Example', 1103)
+]
+
+bm_c = [
+    ('Some History', 1104),
+    ('Available Resistance Values', 1104),
+    ('Resistance Marking', 1105),
+    ('Resistor Types', 1105),
+    ('Confusion Derby', 1105)
+]
+
+bm_d = [
+    ('The Proof', 1107),
+    ("Norton's Theorem", 1108),
+    ('Another Example', 1108),
+    ("Millman's Theorem", 1108)
+]
+
+bm_e = [
+    ('Lowpass Filter', 1109),
+    ('Highpass Filter', 1109),
+    ('Filter Examples', 1109)
+]
+
+bm_f = [
+    ('An Example', 1112),
+    ('Three-Terminal Devices', 1112),
+    ('Nonlinear Devices', 1113)
+]
+
+bm_h = [
+    ('Some Properties of Transmission Lines', 1116),
+    ('Impedance Matching', 1122),
+    ('Limped-Element Delay Lines and Pulse-Forming Networks', 1126),
+    ('Epilogue: Ladder Derivation of Characteristic Impedance', 1127)
+]
+
+bm_i = [
+    ('Television: Video Plus Audio', 1131),
+    ('Combining and Sending the Audio + Video: Modulation', 1133),
+    ('Recording Analog-Format Broadcast or Cable Television', 1135),
+    ('Digital Television: What is it?', 1136),
+    ('Digital Television: Broadcast and Cable Delivery', 1138),
+    ('Direct Satellite Television', 1139),
+    ('Digital Video Streaming over Internet', 1140),
+    ('Digital Cable: Premium Services and Conditional Access', 1141),
+    ('Recording Digital Television', 1142),
+    ('Display Technology', 1142),
+    ('Video Connections: Analog and Digital', 1143)
+]
+
+bm_j = [
+    ('Setting up ICAP SPICE', 1146),
+    ('Entering a Diagram', 1146),
+    ('Running a Simulation', 1146),
+    ('Some Final Points', 1148),
+    ('A Detailed Example: Exploring Amplifier Distrortion', 1148),
+    ('Expanding the Parts Database', 1149)
+]
+
+bm_o  = [
+    ('The Analog Oscilloscope', 1158),
+    ('The Digital Oscilloscope', 1162)
+]
+
+def bookmark(pdf, bookmarks, parent=None, append='', insert=False, offset=0):
+    bms = []
+    n = 1
+    for b in bookmarks:
+        if insert:
+            title = append + str(n) + ' - ' + b[0]
+        else:
+            title = b[0]
+        bms.append(pdf.addBookmark(title, b[1] + offset, parent))
+        n += 1
+    return bms
+
+fp_in = path.join(path.expanduser('~'), 'Library', 'The Art of Electronics - Horowitz, Hill.pdf')
+fp_out = path.join(path.expanduser('~'), 'Desktop', 'The Art of Electronics - Horowitz, Hill.pdf')
+ip = PdfFileReader(open(fp_in, 'rb'))
+op = PdfFileWriter()
+for page in range(ip.getNumPages()):
+    page = ip.getPage(page)
+    op.addPage(page)
+
+m_pre = bookmark(op, bm_pre)
+m_0 = bookmark(op, bm_0, insert=True, offset=32)
+m_post = bookmark(op, bm_post, offset=32)
+m_1 = bookmark(op, bm_1, insert=True, offset=32, parent=m_0[0], append='1.')
+m_2 = bookmark(op, bm_2, insert=True, offset=32, parent=m_0[1], append='2.')
+m_3 = bookmark(op, bm_3, insert=True, offset=32, parent=m_0[2], append='3.')
+m_4 = bookmark(op, bm_4, insert=True, offset=32, parent=m_0[3], append='4.')
+m_5 = bookmark(op, bm_5, insert=True, offset=32, parent=m_0[4], append='5.')
+m_6 = bookmark(op, bm_6, insert=True, offset=32, parent=m_0[5], append='6.')
+m_7 = bookmark(op, bm_7, insert=True, offset=32, parent=m_0[6], append='7.')
+m_8 = bookmark(op, bm_8, insert=True, offset=32, parent=m_0[7], append='8.')
+m_9 = bookmark(op, bm_8, insert=True, offset=32, parent=m_0[8], append='9.')
+m_10 = bookmark(op, bm_9, insert=True, offset=32, parent=m_0[9], append='10.')
+m_11 = bookmark(op, bm_10, insert=True, offset=32, parent=m_0[10], append='11.')
+m_12 = bookmark(op, bm_11, insert=True, offset=32, parent=m_0[11], append='12.')
+m_13 = bookmark(op, bm_11, insert=True, offset=32, parent=m_0[12], append='13.')
+m_14 = bookmark(op, bm_13, insert=True, offset=32, parent=m_0[13], append='14.')
+m_15 = bookmark(op, bm_14, insert=True, offset=32, parent=m_0[14], append='15.')
+m_a = bookmark(op, bm_a, insert=True, offset=32, parent=m_post[0], append='A.')
+m_b = bookmark(op, bm_b, insert=True, offset=32, parent=m_post[1], append='B.')
+m_c = bookmark(op, bm_c, insert=True, offset=32, parent=m_post[2], append='C.')
+m_d = bookmark(op, bm_d, insert=True, offset=32, parent=m_post[3], append='D.')
+m_e = bookmark(op, bm_e, insert=True, offset=32, parent=m_post[4], append='E.')
+m_f = bookmark(op, bm_f, insert=True, offset=32, parent=m_post[5], append='F.')
+m_h = bookmark(op, bm_h, insert=True, offset=32, parent=m_post[7], append='H.')
+m_i = bookmark(op, bm_i, insert=True, offset=32, parent=m_post[8], append='I.')
+m_j = bookmark(op, bm_j, insert=True, offset=32, parent=m_post[9], append='J.')
+m_o = bookmark(op, bm_o, insert=True, offset=32, parent=m_post[14], append='O.')
+
+bookmark(op, [('Additional Exercises for Chapter 1', 66), ('Review of Chapter 1', 68)], offset=32, parent=m_0[0])
+bookmark(op, [('Additional Exercises for Chapter 2', 124), ('Review of Chapter 2', 126)], offset=32, parent=m_0[1])
+bookmark(op, [('Review of Chapter 3', 68)], offset=32, parent=m_0[2])
+bookmark(op, [('Additional Exercises for Chapter 4', 287), ('Review of Chapter 4', 288)], offset=32, parent=m_0[3])
+bookmark(op, [('Review of Chapter 5', 388)], offset=32, parent=m_0[4])
+bookmark(op, [('Additional Exercises for Chapter 6', 422), ('Review of Chapter 6', 423)], offset=32, parent=m_0[5])
+bookmark(op, [('Review of Chapter 7', 470)], offset=32, parent=m_0[6])
+bookmark(op, [('Additional Exercises for Chapter 8', 588), ('Review of Chapter 8', 590)], offset=32, parent=m_0[7])
+bookmark(op, [('Review of Chapter 9', 699)], offset=32, parent=m_0[8])
+bookmark(op, [('Additional Exercises for Chapter 10', 760), ('Review of Chapter 10', 762)], offset=32, parent=m_0[9])
+bookmark(op, [('Review of Chapter 11', 787)], offset=32, parent=m_0[10])
+bookmark(op, [('Review of Chapter 12', 875)], offset=32, parent=m_0[11])
+bookmark(op, [('Additional Exercises for Chapter 13', 984), ('Review of Chapter 13', 985)], offset=32, parent=m_0[12])
+bookmark(op, [('Review of Chapter 14', 1049)], offset=32, parent=m_0[13])
+bookmark(op, [('Review of Chapter 15', 1095)], offset=32, parent=m_0[14])
+
+with open(fp_out, 'wb') as out:
+    op.write(out)
