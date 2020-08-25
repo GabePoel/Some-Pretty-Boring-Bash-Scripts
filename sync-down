@@ -4,3 +4,4 @@ cd ~/Documents/Configuration/Lapidarium-Shell && git pull
 cd ~/Documents/Configuration/Private-Settings && git pull
 cd ~/Documents/Configuration/Some-Pretty-Boring-Shell-Scripts && git pull
 cd ~/Documents/Quick-Installs && git pull
+dnf-soft-sync
