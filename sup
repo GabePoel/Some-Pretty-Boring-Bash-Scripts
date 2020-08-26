@@ -1,10 +1,10 @@
 #!/bin/bash
-cd ~/Seconcephalon/
-> .gitignore
-find Projects/* -size +100M | cat >> .gitignore
-# cd ~/Insync/gpe@berkeley.edu/'Google Drive'/Seconcephalon/
+# cd ~/Seconcephalon/
 # > .gitignore
-# find Projects/LEPRECHAUN/'Analytis Laboratory'/'RUS data'/* | cat >> .gitignore
+# find Projects/* -size +100M | cat >> .gitignore
+cd ~/Insync/gpe@berkeley.edu/'Google Drive'/Seconcephalon/
+> .gitignore
+find Projects/LEPRECHAUN/'Analytis Laboratory'/'RUS data'/* | cat >> .gitignore
 git fetch
 git pull
 git add "*.md"
