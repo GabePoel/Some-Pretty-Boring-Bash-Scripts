@@ -7,5 +7,5 @@ gsettings set org.gnome.desktop.background picture-uri file:///home/gabriel/Docu
 hblock import profile ~/Documents/Configuration/Private-Settings/hBlock_profile.zip
 sudo cp  ~/Documents/Configuration/Private-Settings/defaults.list /usr/share/applications/defaults.list
 ln -s ~/Documents/Configuration/Private-Settings/fonts/* ~/.local/share/fonts/ -f
-cp ~/Documents/Configuration/Private-Settings/ulauncher/* ~/.config/ulauncher/ -r
+cp ~/Documents/Configuration/Private-Settings/ulauncher ~/.config/ulauncher -r
 cp ~/Documents/Configuration/Private-Settings/gedit-styles/* ~/.local/share/gedit/styles/ -r
