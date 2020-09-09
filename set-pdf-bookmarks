@@ -43,6 +43,10 @@ def check_level(line):
 def set_parents(to_process, level=0, parent=None, counter=0, offset=0, line_counter=0):
     processed = []
     # print(processed)
+    try:
+        to_process.remove('')
+    except:
+        pass
     while len(to_process) > 0:
         line = to_process[0]
         line_counter += 1
@@ -104,12 +108,13 @@ def assign_bookmarks(pdf, processed):
 
 # pro = set_parents(s.split('\n'))
 
+home = path.expanduser('~')
 print('Select a PDF to edit.')
-in_path = load_file(path.join('/home/gabriel/Library', 'Introduction to Electrodynamics - Griffiths.pdf'))
+in_path = load_file(path.join(home, 'Library', 'Uncommon Sense - Oppenheimer.pdf'))
 print('Select a bookmarks text file.')
-str_path = load_file('/home/gabriel/Desktop/pdf-bookmarks')
+str_path = load_file(path.join(home, 'Documents', 'Configuration', 'Some-Pretty-Boring-Shell-Scripts', 'pdf-bookmarks'))
 print('Select where to save PDF.')
-out_path = save_file('/home/gabriel/Desktop/Introduction to Electrodynamics - Griffiths.pdf')
+out_path = save_file(path.join(home, 'Desktop', 'Uncommon Sense - Oppenheimer.pdf'))
 # out_path = in_path
 in_pdf = PdfFileReader(open(in_path, 'rb'))
 out_pdf = PdfFileWriter()
