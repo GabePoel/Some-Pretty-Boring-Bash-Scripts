@@ -1,0 +1,5 @@
+#!/bin/bash
+
+sudo rm /usr/share/icons/korla-plus -r
+sudo cp ~/Documents/Configuration/Korla-Plus/korla-plus /usr/share/icons/ -r
+
