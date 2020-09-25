@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 from os import path
+from os import system
 from PyPDF2 import PdfFileWriter, PdfFileReader
 import tkinter as tk
 from tkinter import filedialog
@@ -51,7 +52,7 @@ def set_parents(to_process, level=0, parent=None, counter=0, offset=0, line_coun
         line = to_process[0]
         line_counter += 1
         if line[0] == '~':
-            offset = int(line[1:])
+            offset = int(line[2:]) - 2
             line_counter -= 1
             to_process = to_process[1:]
         else:
@@ -109,21 +110,26 @@ def assign_bookmarks(pdf, processed):
 # pro = set_parents(s.split('\n'))
 
 home = path.expanduser('~')
-print('Select a PDF to edit.')
-in_path = load_file(path.join(home, 'Library', 'Uncommon Sense - Oppenheimer.pdf'))
-print('Select a bookmarks text file.')
 str_path = load_file(path.join(home, 'Documents', 'Configuration', 'Some-Pretty-Boring-Shell-Scripts', 'pdf-bookmarks'))
-print('Select where to save PDF.')
-out_path = save_file(path.join(home, 'Desktop', 'Uncommon Sense - Oppenheimer.pdf'))
+pre = import_list(str_path)
+in_path = load_file(path.join(home, 'Library', pre[0]))
+out_path = save_file(path.join(home, 'Desktop', pre[0]))
+pre = pre[1:]
+try:
+    pre.remove('', 999)
+except:
+    pass
 # out_path = in_path
 in_pdf = PdfFileReader(open(in_path, 'rb'))
 out_pdf = PdfFileWriter()
 for page in range(in_pdf.getNumPages()):
     page = in_pdf.getPage(page)
     out_pdf.addPage(page)
-pre = import_list(str_path)
-x, processed, y, z = set_parents(pre)
+x, processed, y, z = set_parents(pre, offset=-1)
 # print(processed)
 assign_bookmarks(out_pdf, processed)
 with open(out_path, 'wb') as out:
     out_pdf.write(out)
+system('cp "' + in_path + '" "' + out_path[:-4] + ' BACKUP.pdf"')
+system('cp "' + out_path + '" "' + in_path + '"')
+system('rm "' + out_path + '"')

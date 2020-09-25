@@ -1,30 +1,78 @@
-~-1
-* Cover 1
-* Contents 6
-* Forward 7
-~9
-Travelling to a Land we Cannot See 1
-The Open Mind 17
-Science in Being: Research and the Liberal University 27
-The Consequences of Action 41
-~8
-Uncommon Sense 57
-    Uncommon Sense 57
-    An Open House 67
-Prospects in the Arts and Sciences 79
-An Inward Look 89
-Tradition and Discovery 103
-~7
-Progress in Freedom 117
-~6
-On Science and Culture 123
-~5
-The Power to Act: The Scientific Revolution and its Effects on Democratic Institutions 141
-A World Without War 147
-~4
-L'Intime et le Comun: The Intimate and the Open 157
-~3
-To Live with Ourselves 169
-Physics and Man's Understanding: For the Smithsonian Institution Bicentennial 181
-A Time in Need 191
-* Acknowledgements and Bibliography 193
+Statistical Mechanics - Lee.pdf
+~ 2
+* Contents 1
+The Foundation 5
+    Microscopic versus macroscopic states 5
+    Fundamental assumption for observed values of physical quantities 7
+        Statistical ensembles 8
+    The principle of equal weight and the microcanonical ensemble 8
+        The microcanonical ensemble 9
+        Clarifications 9
+        The thermodynamic weight of a macroscopic state and entropy 11
+        The statistical definition of entropy 11
+        The statistical temperature 15
+    Energy exchange contact between two systems and the canonical ensemble 15
+        Canonical ensemble 17
+    Energy and particle exchange contact between two systems and the grand canonical ensemble 19
+        Grand canonical ensemble 20
+    Energy, particle and volume exchange contact between two systems and the associated ensemble distribution 21
+    Connection with thermodynamics 23
+        The first law of thermodynamics 23
+        The second law of thermodynamics 24
+        The third law of thermodynamics 24
+    Partition functions and thermodynamic functions 25
+        Z and the Helmholtz free energy F 25
+        Ξ and the free energy J 26
+        Y and the Gibbs Free energy G 27
+    Summarizing thermodynamics 28
+Some simple applications 31
+    General principle 31
+        Theorem: pV = k B T ln Ξ 31
+    Classical systems 33
+        Maxwell distribution 33
+        Equal-partition theorem 35
+        Molecular absorption: The hydrogen storage problem 36
+        Poisson statistics 39
+        Definition of the entropy in terms of probability 41
+    Quantum systems 43
+        Paramagnet 43
+        Dielectric versus paraelectric 44
+        Internal partition fucntion of gases 47
+Ideal quantum gases 51
+    Ideal non-relativistic Fermi gas 51
+    Ideal non-relativistic Bose gas 59
+        The amazing work of indistinguishability 65
+    Ideal relativistic Bose gas: Blackbody radiation 67
+    An atom subjected to blackbody radiation 69
+    The case of indistinguishable two-level atoms 70
+        Example: Phonon contribution to the specific heat 72
+    Ideal relativistic Fermi gas: The Chandrasekhar limit 74
+        Example: Specific heat of graphene 78
+Introduction to Some Important Concepts for Interacting Systems 81
+    Elementary excitations 81
+    Order parameter 83
+    Spontaneous symmetry braking 85
+    Goldstone's theorem 87
+    Spatial dimension and stability of ordered states 92
+        Easy axis ferromagnet 92
+        Easy plane and isotropic ferromagnet 94
+Phase transitions 97
+    Example: Critical phenomena of an easy-axis ferromagnet 99
+    Universality 100
+    Scaling 101
+    A simple model for easy-axis ferromagnet: The Ising model 101
+    The predictions of mean-field theory 104
+        The spontaneous magnetization, the exponent β 104
+        The exponent δ 106
+        The exponent γ 107
+        The exponent α 107
+        The exponent ν and η 109
+        Scaling 112
+    The Landau theory of phase transitions 113
+        First order phase transitions 115
+    Problems with the mean-field thoery 116
+The renormalization group idea 121
+    The recursion relations 122
+    The fixed points and linearized recursion relations 123
+    The eigenvalues and eigenvectors of the linear recursion relations 124
+    The meaning of the eigenvalues 126
