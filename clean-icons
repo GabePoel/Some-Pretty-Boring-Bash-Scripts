@@ -1,0 +1,55 @@
+#!/usr/bin/python3
+
+import gi
+import os
+
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk
+
+dialog = Gtk.FileChooserDialog(
+    title="Please choose a folder",
+    action=Gtk.FileChooserAction.SELECT_FOLDER,
+)
+dialog.add_buttons(
+    Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, "Select", Gtk.ResponseType.OK
+)
+dialog.set_default_size(800, 400)
+
+response = dialog.run()
+if response == Gtk.ResponseType.OK:
+    selected = dialog.get_filename()
+elif response == Gtk.ResponseType.CANCEL:
+    print("Cancel clicked")
+
+dialog.destroy()
+svgs = []
+
+for path, subdirs, files in os.walk(selected):
+    for name in files:
+        if name[-3:] == 'svg':
+            svgs.append(os.path.join(path, name))
+
+for svg in svgs:
+    print(svg)
+    f = open(svg, 'r')
+    s = f.read()
+    run = True
+    n = 0
+    while run and n < 5:
+        print(n)
+        n += 1
+        if 'fill="none"' in s:
+            if '<rect fill="none"' in s:
+                start = s.find('<rect fill="none"')
+                end = s.find('width="24"/>') + len('width="24"/>')
+            else:
+                start = s.find('<path d="M')
+                end = s.find('fill="none"/>') + len('fill="none"/>')
+            s = s[0:start] + s[end:]
+        else:
+            run = False
+        print(s)
+        f.close()
+        f = open(svg, 'w+')
+        f.write(s)
+    f.close()
