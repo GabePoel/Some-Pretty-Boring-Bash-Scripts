@@ -3,25 +3,27 @@
 import gi
 import os
 
-gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
+# gi.require_version("Gtk", "3.0")
+# from gi.repository import Gtk
 
-dialog = Gtk.FileChooserDialog(
-    title="Please choose a folder",
-    action=Gtk.FileChooserAction.SELECT_FOLDER,
-)
-dialog.add_buttons(
-    Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, "Select", Gtk.ResponseType.OK
-)
-dialog.set_default_size(800, 400)
+# dialog = Gtk.FileChooserDialog(
+#     title="Please choose a folder",
+#     action=Gtk.FileChooserAction.SELECT_FOLDER,
+# )
+# dialog.add_buttons(
+#     Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, "Select", Gtk.ResponseType.OK
+# )
+# dialog.set_default_size(800, 400)
 
-response = dialog.run()
-if response == Gtk.ResponseType.OK:
-    selected = dialog.get_filename()
-elif response == Gtk.ResponseType.CANCEL:
-    print("Cancel clicked")
+# response = dialog.run()
+# if response == Gtk.ResponseType.OK:
+#     selected = dialog.get_filename()
+# elif response == Gtk.ResponseType.CANCEL:
+#     print("Cancel clicked")
 
-dialog.destroy()
+selected = os.getcwd()
+
+# dialog.destroy()
 svgs = []
 
 for path, subdirs, files in os.walk(selected):
