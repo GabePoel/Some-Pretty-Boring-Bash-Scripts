@@ -1,0 +1,4 @@
+#!/bin/sh
+
+KEY='/org/pantheon/desktop/gala/notifications/do-not-disturb'
+dconf write $KEY $(if [ $(dconf read $KEY) = 'true' ]; then echo false; else echo true; fi)
