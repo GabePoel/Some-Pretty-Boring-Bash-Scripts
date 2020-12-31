@@ -1,0 +1,138 @@
+#!/usr/bin/python3
+
+import os
+import shutil
+import errno
+import sys
+import zipfile
+
+home = os.path.expanduser('~')
+manifest = os.path.join(home, 'Insync', 'gpe@berkeley.edu', 'Google Drive', 'Seconcephalon', 'IMP', 'Electronic Maintenance', 'Linux', 'Scripts', 'home-backup-manifest')
+destination = os.path.join(home, 'Insync', 'gpe@berkeley.edu', 'Google Drive', 'Seconcephalon', 'IMP', 'Electronic Maintenance', 'Linux', 'Backups', 'home-backup.zip')
+manifest_file = open(manifest, 'r')
+cache = os.path.join(home, '.backup-cache')
+data = os.path.join(cache, 'data')
+archive = os.path.join(cache, 'home-backup')
+lines = manifest_file.readlines()
+manifest_file.close()
+
+def copy_anything(src, dst, symlinks=False, ignore=None):
+
+    try:
+        shutil.copytree(src, dst, dirs_exist_ok=True)
+    except OSError as exc: # python >2.5
+        if exc.errno == errno.ENOTDIR:
+            shutil.copy(src, dst)
+        else: raise
+
+def parse_indent(line):
+    count = 0
+    while line[:4] == '    ':
+        count += 1
+        line = line[4:]
+    if line[0] != '#':
+        return (count, line[:-1])
+    else:
+        return None
+
+def convert_lines(lines):
+    simple_tree = []
+    line_number = 0
+    for l in lines:
+        parsed = parse_indent(l)
+        if parsed is not None:
+            simple_tree.append([line_number, parsed[0], parsed[1], False])
+            line_number += 1
+    return simple_tree
+
+def find_parent(simple_tree, line_number):
+    search = True
+    level = simple_tree[line_number][1]
+    search_number = line_number - 1
+    parent_number = None
+    while search:
+        if level == 0:
+            search = False
+        else:
+            search_level = simple_tree[search_number][1]
+            if search_level < level:
+                parent_number = search_number
+                search = False
+            else:
+                search_number -= 1
+    return parent_number
+
+def set_root(simple_tree, line_number):
+    if line_number == simple_tree[-1][0]:
+        simple_tree[line_number][3] = True
+    else:
+        level = simple_tree[line_number][1]
+        next_level = simple_tree[line_number + 1][1]
+        if level >= next_level:
+            simple_tree[line_number][3] = True
+
+def make_temp():
+    if os.path.exists(cache):
+        shutil.rmtree(cache)
+    os.mkdir(cache)
+    os.mkdir(data)
+
+def delete_temp():
+    if os.path.exists(cache):
+        shutil.rmtree(cache)
+
+simple_tree = convert_lines(lines)
+relative_backup_paths = []
+
+for node in simple_tree:
+    parent_number = find_parent(simple_tree, node[0])
+    if not parent_number is None:
+        parent = simple_tree[parent_number][2]
+    else:
+        parent = None
+    if not parent is None:
+        node[2] = os.path.join(parent, node[2])
+    set_root(simple_tree, node[0])
+    if node[3]:
+        relative_backup_paths.append(node[2])
+
+command = None
+if len(sys.argv) > 1:
+    command = sys.argv[1]
+
+if command == 'export':
+    make_temp()
+    print('\nBacking up the following paths:')
+    if os.path.exists(destination):
+        copy_anything(destination, cache)
+        z = zipfile.ZipFile(archive + '.zip', 'r')
+        z.extractall(data)
+        os.remove(archive + '.zip')
+    for path in relative_backup_paths:
+        print(' - ~/' + str(path))
+        absolute_path = os.path.join(home, path)
+        backup_path = os.path.join(data, path)
+        if os.path.exists(absolute_path):
+            copy_anything(absolute_path, backup_path)
+    print('\nCompressing backed up files.')
+    shutil.make_archive(archive, 'zip', data)
+    copy_anything(archive + '.zip', destination)
+    print('\nBackup complete!\n')
+    delete_temp()
+
+if command == 'import':
+    make_temp()
+    copy_anything(destination, cache)
+    print('\nUncompressing backed up files.')
+    z = zipfile.ZipFile(archive + '.zip', 'r')
+    z.extractall(data)
+    print('\nLoading backups to the following paths:')
+    for path in relative_backup_paths:
+        print(' - ~/' + str(path))
+    for path in relative_backup_paths:
+        absolute_path = os.path.join(home, path)
+        backup_path = os.path.join(data, path)
+        if os.path.exists(backup_path):
+            copy_anything(backup_path, absolute_path)
+    print('\nImport complete!\n')
+    delete_temp()

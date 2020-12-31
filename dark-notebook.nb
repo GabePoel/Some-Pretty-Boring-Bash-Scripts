@@ -1,0 +1,46 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[       950,         38]
+NotebookOptionsPosition[       597,         22]
+NotebookOutlinePosition[      1090,         41]
+CellTagsIndexPosition[      1047,         38]
+WindowTitle->ModelessDialog
+WindowFrame->ModelessDialog*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+},
+WindowSize->{2880., 1572.75},
+WindowMargins->{{0, Automatic}, {0., 47.25}},
+WindowFrame->"ModelessDialog",
+WindowTitle->"ModelessDialog",
+TaggingRules->{"TryRealOnly" -> False},
+FrontEndVersion->"12.1 for Linux x86 (64-bit) (June 19, 2020)",
+StyleDefinitions->"Dracula.nb",
+ExpressionUUID->"e549ebb8-0d31-4242-a44f-89634abcea5c"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+}
+]
+*)
+

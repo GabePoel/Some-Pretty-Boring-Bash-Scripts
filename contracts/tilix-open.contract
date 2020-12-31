@@ -1,0 +1,5 @@
+[Contractor Entry]
+Name=Open in Terminal
+Icon=com.gexperts.Tilix
+MimeType=inode/directory;
+Exec=io.elementary.terminal -w %u

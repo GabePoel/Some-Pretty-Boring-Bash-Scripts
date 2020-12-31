@@ -1,0 +1,18 @@
+#!/usr/bin/python3
+#what:Move Typora images to Google Drive.
+#copy all typora user images into hidden assets folder in Google Drive
+#change every instance of /home/gabriel/.config/Typora/typora-user-images to that asset folder
+
+import os
+
+def fix_file(file, in_string, out_string):
+    fin = open(file, "rt")
+    data = fin.read()
+    data = data.replace(in_string, out_string)
+    fin.close()
+    fin = open(file, "wt")
+    fin.write(data)
+    fin.close()
+
+home = os.path.expanduser("~")
+seconcephalon = os.path.join(home, 'Insync', 'gpe@berkeley.edu', 'Google Drive', 'Seconcephalon')

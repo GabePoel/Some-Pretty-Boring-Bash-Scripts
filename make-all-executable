@@ -1,5 +1,0 @@
-#!/bin/bash
-mv ~/Documents/Configuration/Some-Pretty-Boring-Shell-Scripts/README.md ~/Documents/Configuration/temp.md
-chmod +x ~/Documents/Configuration/Some-Pretty-Boring-Shell-Scripts/*
-cp ~/Documents/Configuration/Some-Pretty-Boring-Shell-Scripts/* ~/.local/bin
-mv ~/Documents/Configuration/temp.md ~/Documents/Configuration/Some-Pretty-Boring-Shell-Scripts/README.md

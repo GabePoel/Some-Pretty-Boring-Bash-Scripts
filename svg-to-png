@@ -1,4 +1,5 @@
- #!/bin/bash
+#!/bin/bash
+#what:DEPRECATED! Converts all SVGs in the specified directory into PNGs along specified export path.
 cd ~/Configuration/Icons
 
 for file in Packs/McMojave-circle/src/apps/scalable/*.svg

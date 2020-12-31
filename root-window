@@ -1,0 +1,12 @@
+#!/bin/bash
+#what:Open a new window or tab in Elementary files.
+PID=$(xdotool getwindowfocus getwindowpid)
+STR=$(ps ww -o ppid=,pid=,cmd= -q $PID)
+echo $STR
+SUB='io.elementary.files /'
+if [[ "$STR" == *"$SUB"* ]];
+then
+    pkexec io.elementary.files ~
+else
+    io.elementary.files-pkexec
+fi

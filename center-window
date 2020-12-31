@@ -1,4 +1,5 @@
 #!/bin/bash
+#what:WIP! Moves current active window to center.
 
 Xaxis=$(xrandr --current | grep '*+' | uniq | awk '{print $1}' |  cut -d 'x' -f1)
 Yaxis=$(xrandr --current | grep '*+' | uniq | awk '{print $1}' |  cut -d 'x' -f2)

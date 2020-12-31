@@ -1,2 +1,0 @@
-#!/bin/bash
-sudo sed -i 's\Icon=/usr/share/pixmaps/slack.png\Icon=slack\g' /usr/share/applications/slack.desktop

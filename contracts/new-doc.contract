@@ -1,0 +1,5 @@
+[Contractor Entry]
+Name=New Google Doc
+Icon=gddoc
+MimeType=inode/directory;
+Exec=new-doc doc %F

@@ -1,0 +1,5 @@
+[Contractor Entry]
+Name=New Google Sheet
+Icon=gdsheet
+MimeType=inode/directory;
+Exec=new-doc sheet %F

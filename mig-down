@@ -1,6 +1,0 @@
-#!/bin/bash
-
-dconf load -f / < '/home/gabriel/Insync/gpe@berkeley.edu/Google Drive/Parking Lot/all.dconf'
-hblock import profile '/home/gabriel/Insync/gpe@berkeley.edu/Google Drive/Parking Lot/hBlock_profile.zip'
-cp '/home/gabriel/Insync/gpe@berkeley.edu/Google Drive/Parking Lot/ulauncher' ~/.config/ -r
-cp '/home/gabriel/Insync/gpe@berkeley.edu/Google Drive/Parking Lot/bin/*' ~/.local/bin/

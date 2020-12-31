@@ -1,3 +1,6 @@
 # !/bin/bash
+#what:Paste the current date.
 date '+%m-%d-%Y' | tr -d "\n" | xsel -i -b
 xsel -b
+xdotool keyup 'ctrl+e'
+xdotool key 'ctrl+v'

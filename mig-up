@@ -1,7 +1,0 @@
-#!/bin/bash
-
-dconf dump / > '/home/gabriel/Insync/gpe@berkeley.edu/Google Drive/Parking Lot/all.dconf'
-hblock export profile '/home/gabriel/Insync/gpe@berkeley.edu/Google Drive/Parking Lot'
-cp ~/.config/ulauncher '/home/gabriel/Insync/gpe@berkeley.edu/Google Drive/Parking Lot/' -r
-mkdir '/home/gabriel/Insync/gpe@berkeley.edu/Google Drive/Parking Lot/bin'
-cp ~/.local/bin/* '/home/gabriel/Insync/gpe@berkeley.edu/Google Drive/Parking Lot/bin/'

@@ -1,0 +1,5 @@
+[Contractor Entry]
+Name=Open in Google Drive
+Icon=google-drive
+MimeType=!node;
+Exec=insync open-cloud %F

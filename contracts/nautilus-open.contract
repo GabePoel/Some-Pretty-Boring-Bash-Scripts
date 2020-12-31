@@ -1,0 +1,5 @@
+[Contractor Entry]
+Name=Open in Nautilus
+Icon=io.elementary.files
+MimeType=inode/directory;
+Exec=env GTK_THEME=Adementary-dark nautilus %F

@@ -1,0 +1,5 @@
+[Contractor Entry]
+Name=New Google Slides
+Icon=gdslides
+MimeType=inode/directory;
+Exec=new-doc pres %F

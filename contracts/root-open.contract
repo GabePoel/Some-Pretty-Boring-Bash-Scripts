@@ -1,0 +1,5 @@
+[Contractor Entry]
+Name=Open as Root
+Icon=io.elementary.files
+MimeType=inode/directory;
+Exec=pkexec io.elementary.files %F

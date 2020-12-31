@@ -1,2 +1,0 @@
-#!/bin/bash
-sudo zerotier-cli join 9bee8941b52b4c6e

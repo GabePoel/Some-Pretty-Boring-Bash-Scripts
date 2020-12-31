@@ -1,0 +1,55 @@
+#!/bin/bash
+#what:Create Google Drive files using Insync.
+
+# Pass in what type of file. doc, pres, or sheet
+case $1 in
+    doc)
+        FILE='Document.odt'
+        NEW='Document.gddoc'
+        ALTNEW='Document.odt.gddoc'
+        CHECKER="Untitled Document"
+        ;;
+        
+    pres)
+        FILE='Presentation.odp'
+        NEW='Presentation.gdslides'
+        ALTNEW='Presentation.odp.gdslides'
+        CHECKER="Untitled Presentation"
+        ;;
+        
+    sheet)
+        FILE='Spreadsheet.ods'
+        NEW='Spreadsheet.gdsheet'
+        ALTNEW='Spreadsheet.ods.gdsheet'
+        CHECKER="Untitled Spreadsheet"
+        ;;
+esac
+
+HELPER=0
+
+# Check to see if Insync has processed the file yet
+get_window()
+{
+    WINDOW=$(xdotool getactivewindow getwindowname)
+    if [[ "$WINDOW" == *"$CHECKER"* ]] || [[ "$WINDOW" == *"Google"* ]]
+    then
+        HELPER=1
+    fi
+    if [[ $HELPER == 0 ]]
+    then
+        insync open-cloud "$STR"
+    fi
+}
+
+# Convert to Google Drive file
+cp '/home/gabriel/Templates/Documents/'$FILE "$2"
+mv "$2/$FILE" "$2/Untitled $FILE"
+STR="$2/Untitled $FILE"
+while [ ! -f "$2/Untitled $NEW" ] && [ ! -f "$2/Untitled $ALTNEW" ]; do get_window && sleep 2; done
+
+# Cleanup
+rm "$2/Untitled $FILE"
+if [ -f "$2/Untitled $ALTNEW" ]
+then
+    mv "$2/Untitled $ALTNEW" "$2/Untitled $NEW"
+fi

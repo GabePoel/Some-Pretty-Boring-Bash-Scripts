@@ -1,0 +1,66 @@
+#!/usr/bin/python3
+#what:Says what scripts do.
+
+import os
+import sys
+from termcolor import colored
+
+scriptsdir = '/home/gabriel/Insync/gpe@berkeley.edu/Google Drive/Seconcephalon/IMP/Electronic Maintenance/Linux/Scripts'
+scripts = os.listdir(scriptsdir)
+scripts.sort()
+include_dep = True
+if len(sys.argv) > 1 and sys.argv[1] == '-c':
+    include_dep = False
+for script in scripts:
+    sub = colored(' - ', 'blue')
+    if_print = True
+    if script[-1] == '~':
+        if_print = False
+    f = open(os.path.join(scriptsdir, script), 'r')
+    script_text = colored(script, 'blue')
+    try:
+        l = f.readlines()[1]
+        if l[0:6] == '#what:':
+            info = l[6:]
+            dep = False
+            description = sub + info
+            if 'DEPRECATED' in info:
+                dep = True
+                sub = colored(' - ', 'magenta')
+                description = sub + colored('DEPRECATED!', 'red') + info[11:]
+                script_text = colored(script, 'magenta')
+            if 'DEPENDENCY' in info:
+                dep = True
+                sub = colored(' - ', 'magenta')
+                description = sub + colored('DEPENDENCY!', 'yellow') + info[11:]
+                script_text = colored(script, 'magenta')
+            if 'REVISE' in info:
+                sub = colored(' - ', 'cyan')
+                description = sub + colored('REVISE!', 'green') + info[7:]
+                script_text = colored(script, 'cyan')
+            if 'WIP' in info:
+                sub = colored(' - ', 'cyan')
+                description = sub + colored('WIP!', 'green') + info[4:]
+                script_text = colored(script, 'cyan')
+            if not include_dep and dep:
+                if_print = False
+            if if_print:
+                print(script_text)
+                print(description)
+                # print('')
+    except:
+        if if_print:
+            print(script_text)
+        # print('')
+# else:
+#     for script in scripts:
+#         f = open(os.path.join(scriptsdir, script), 'r')
+#         print(script)
+#         try:
+#             l = f.readlines()[1]
+#             if l[0:6] == '#what:':
+#                 print(' - ' + l[6:])
+#             else:
+#                 print('')
+#         except:
+#             print('')

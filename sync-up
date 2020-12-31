@@ -1,7 +1,0 @@
-#!/bin/bash
-time=`date`
-cd ~/Documents/Configuration/Korla-Plus && git add . && git commit -m "${time}" && git push
-cd ~/Documents/Configuration/Lapidarium-Shell && git add . && git commit -m "${time}" && git push
-cd ~/Documents/Configuration/Private-Settings && git add . && git commit -m "${time}" && git push
-cd ~/Documents/Configuration/Some-Pretty-Boring-Shell-Scripts && git add . && git commit -m "${time}" && git push
-cd ~/Documents/Quick-Installs && git add . && git commit -m "${time}" && git push

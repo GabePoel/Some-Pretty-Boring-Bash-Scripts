@@ -1,3 +1,0 @@
- #!/bin/bash
- 
-echo '[General]\nautoScale=false\nscaleFactor=1' > ~/.config/zoomus.conf
